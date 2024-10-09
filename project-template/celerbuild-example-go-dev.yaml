@@ -1,0 +1,18 @@
+name: celerbuild-example-go-dev
+env: dev
+space: default
+repoPath: git@github.com:celerbuild/celerbuild-example-go.git
+targetDeployPath: /home/ubuntu/apps
+targetDeployWarehousePath: /home/ubuntu/repos
+targetWarehouseVersionKeep: 3
+serverClusterID: 1
+deployMode: branch
+deployUser: ubuntu
+buildCmds: make build && cd build && tar -zcvf ${LOCAL_PACKAGE_FILE} *
+preDeploymentCmds: >-
+  PROJECT_DIR="${TARGET_DEPLOYMENT_PATH}/${TARGET_DEPLOYMENT_PROJECT_NAME}"; [
+  -d "$PROJECT_DIR" ] && cd "$PROJECT_DIR" && ./stop.sh || echo "Directory
+  $PROJECT_DIR does not exist"
+postDeploymentCmds: ./start.sh
+numberOfLatestTags: 0
+specifyBranches: dev
