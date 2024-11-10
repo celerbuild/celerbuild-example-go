@@ -7,7 +7,7 @@ import (
 )
 
 // Version of the application
-const Version = "1.0.3"
+const Version = "1.0.4"
 
 func main() {
 	// Create a default Gin router
