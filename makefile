@@ -1,4 +1,4 @@
-.PHONY: build package run-server test
+.PHONY: build package run-server test clean
 
 test:
 	@echo "Running unit tests..."
@@ -10,7 +10,9 @@ build: test
 	@echo "Packaging the application..."
 	cp -r shell/* ./build/
 	chmod +x ./build/*.sh
-	cd build && tar -zcvf ${LOCAL_PACKAGE_FILE} *
 
-run-server:
-	go run main.go
+clean:
+	@echo "Cleaning up..."
+	rm -f ./build/server
+	rm -f ./build/server.pid
+	rm -rf ./build/*.sh
