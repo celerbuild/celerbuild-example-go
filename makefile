@@ -1,5 +1,10 @@
-.PHONY: build package run-server
-build:
+.PHONY: build package run-server test clean
+
+test:
+	@echo "Running unit tests..."
+	go test ./tests/... -v
+
+build: test
 	@echo "Building the web server for Linux..."
 	GOOS=linux GOARCH=amd64 go build -o ./build/server main.go
 	@echo "Packaging the application..."
