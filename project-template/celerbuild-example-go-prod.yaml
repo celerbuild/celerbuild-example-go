@@ -13,6 +13,6 @@ preDeploymentCmds: >-
   PROJECT_DIR="${TARGET_DEPLOYMENT_PATH}/${TARGET_DEPLOYMENT_PROJECT_NAME}"; [
   -d "$PROJECT_DIR" ] && cd "$PROJECT_DIR" && ./stop.sh || echo "Directory
   $PROJECT_DIR does not exist"
-postDeploymentCmds: ./start.sh
+postDeploymentCmds: cd "${TARGET_DEPLOYMENT_PATH}/${TARGET_DEPLOYMENT_PROJECT_NAME}" && ./start.sh
 numberOfLatestTags: 3
 specifyBranches: ''
