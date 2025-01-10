@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const Version = "1.0.7"
+const Version = "1.0.8"
 
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
