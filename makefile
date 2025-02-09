@@ -2,7 +2,7 @@
 
 test:
 	@echo "Running unit tests..."
-	go test ./tests/... -v
+	go test -count=1 ./tests/... -v
 
 build: test
 	@echo "Building the web server for Linux..."

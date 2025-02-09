@@ -2,8 +2,8 @@ name: celerbuild-example-go-prod
 env: prod
 space: default
 repoPath: git@github.com:celerbuild/celerbuild-example-go.git
-targetDeployPath: /home/ubuntu/apps
-targetDeployWarehousePath: /home/ubuntu/repos
+targetDeployPath: /home/ubuntu/apps/go
+targetDeployWarehousePath: /home/ubuntu/repos/go
 targetWarehouseVersionKeep: 3
 serverClusterID: 2
 deployMode: tag
