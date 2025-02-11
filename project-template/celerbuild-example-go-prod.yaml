@@ -8,7 +8,7 @@ targetWarehouseVersionKeep: 3
 serverClusterID: 2
 deployMode: tag
 deployUser: ubuntu
-buildCmds: make build && cd build && tar -zcvf ${LOCAL_PACKAGE_FILE} *
+buildCmds: make build && cd build && tar --no-xattrs --no-mac-metadata -zcvf ${LOCAL_PACKAGE_FILE} *
 preDeploymentCmds: >-
   PROJECT_DIR="${TARGET_DEPLOYMENT_PATH}/${TARGET_DEPLOYMENT_PROJECT_NAME}"; [
   -d "$PROJECT_DIR" ] && cd "$PROJECT_DIR" && ./stop.sh || echo "Directory
