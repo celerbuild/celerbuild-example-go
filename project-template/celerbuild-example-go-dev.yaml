@@ -1,6 +1,5 @@
 name: celerbuild-example-go-dev
 env: dev
-space: default
 repoPath: git@github.com:celerbuild/celerbuild-example-go.git
 targetDeployPath: /home/ubuntu/apps/go
 targetDeployWarehousePath: /home/ubuntu/repos/go
