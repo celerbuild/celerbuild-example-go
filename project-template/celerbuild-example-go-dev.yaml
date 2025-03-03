@@ -7,11 +7,39 @@ targetWarehouseVersionKeep: 3
 serverClusterID: 1
 deployMode: branch
 deployUser: ubuntu
-buildCmds: make build && cd build && tar --no-xattrs --no-mac-metadata -zcvf ${LOCAL_PACKAGE_FILE} *
-preDeploymentCmds: >-
-  PROJECT_DIR="${TARGET_DEPLOYMENT_PATH}/${TARGET_DEPLOYMENT_PROJECT_NAME}"; [
-  -d "$PROJECT_DIR" ] && cd "$PROJECT_DIR" && ./stop.sh || echo "Directory
-  $PROJECT_DIR does not exist"
+buildCmds: |-
+  # Check the operating system type
+  OS=$(uname)
+
+  # Build the application
+  echo "Building the application..."
+  make build
+
+  # Change to build directory
+  cd build
+
+  # Create package based on OS type
+  if [ "$OS" = "Darwin" ]; then
+      # For macOS, include mac-specific options
+      tar --no-xattrs --no-mac-metadata -zcvf ${LOCAL_PACKAGE_FILE} *
+  else
+      # For Linux and other systems, use standard options
+      tar --no-xattrs -zcvf ${LOCAL_PACKAGE_FILE} *
+  fi
+preDeploymentCmds: |-
+  # Define project directory path
+  PROJECT_DIR="${TARGET_DEPLOYMENT_PATH}/${TARGET_DEPLOYMENT_PROJECT_NAME}"
+
+  # Check if directory exists and execute stop script
+  if [ -d "$PROJECT_DIR" ]; then
+      # Change to project directory
+      cd "$PROJECT_DIR"
+      # Execute stop script
+      ./stop.sh
+  else
+      # Print error message if directory not found
+      echo "Directory $PROJECT_DIR does not exist"
+  fi
 postDeploymentCmds: cd "${TARGET_DEPLOYMENT_PATH}/${TARGET_DEPLOYMENT_PROJECT_NAME}" && ./start.sh
 numberOfLatestTags: 0
 specifyBranches: dev
